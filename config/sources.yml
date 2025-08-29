@@ -1,0 +1,21 @@
+# config/sources.yml
+seed_urls:
+  # Apex Developer Guide（主要どころを起点にし、内部リンクをたどる）
+  - "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm"
+  - "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_triggers.htm"
+  - "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_async_overview.htm"
+
+  # SOQL/SOSL リファレンス起点
+  - "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SOQL.htm"
+  - "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_SOSL.htm"
+
+allow_patterns:
+  # Apex 開発者ガイド配下のみ拾う（拡げたければ正規表現を追加）
+  - "^https://developer\\.salesforce\\.com/docs/atlas\\.en-us\\.apexcode\\.meta/apexcode/.*$"
+
+deny_patterns:
+  - "\\.pdf$"
+  - "javascript:void\\(0\\)"
+
+max_depth: 2           # 起点から2階層まで
+max_pages: 120         # MVPでは取りすぎ防止
