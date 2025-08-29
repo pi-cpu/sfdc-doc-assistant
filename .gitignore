@@ -1,0 +1,7 @@
+.env
+.venv/
+rag/db/
+rag/raw/
+rag/md/
+rag/meta/
+.vscode/

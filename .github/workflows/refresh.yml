@@ -1,0 +1,28 @@
+# .github/workflows/refresh.yml
+name: Refresh Docs
+on:
+  schedule:
+    - cron: "0 16 * * 0"   # 毎週月曜01:00 JST相当（UTC16:00）
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # 差分コミット
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q trafilatura beautifulsoup4 chromadb openai pyyaml
+      - run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+      - run: make refresh
+      - name: Commit changes
+        run: |
+          git config user.name  "doc-bot"
+          git config user.email "doc-bot@example.com"
+          git add -A
+          git diff --quiet && echo "No changes" || git commit -m "auto: refresh docs"
+          git push
