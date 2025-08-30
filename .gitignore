@@ -5,3 +5,4 @@ rag/raw/
 rag/md/
 rag/meta/
 .vscode/
+*.pdf
